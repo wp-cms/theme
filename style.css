@@ -1,0 +1,282 @@
+/**
+Theme Name: Theme
+Author: Alvaro Franz
+Author URI: https://alvarofranz.com
+Description: Theme for wpcms.dev
+Version: 1.0.0
+License: GNU General Public License v2 or later
+Text Domain: theme
+*/
+
+/*
+This theme comes bundled by default with WP CMS and is used for the main site wpcms.dev
+Please copy, fork, tweak and do whatever you want with this theme, make it your own!
+I'm not using any fancy library because they always stop being fancy eventually.
+Just pure HTML, CSS, JAVASCRIPT and PHP.
+Well documented so you can understand how WP CMS themes work and create your own.
+*/
+
+:root {
+    --color-white: #F2F2F2;
+    --color-grey: #343334;
+    --color-dark: #2C292D;
+    --color-orange: #FC9867;
+    --color-blue: #78DCE8;
+    --color-green: #A9DC76;
+    --color-red: #FF6188;
+    --toolbars-height: 45px;
+}
+
+/*
+Fonts
+*/
+
+@font-face {
+    font-family: 'Cousine';
+    src: url('./assets/fonts/Cousine-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cousine';
+    src: url('./assets/fonts/Cousine-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cousine';
+    src: url('./assets/fonts/Cousine-Italic.ttf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Cousine';
+    src: url('./assets/fonts/Cousine-BoldItalic.ttf');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Italic.ttf');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-BoldItalic.ttf');
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Text meant only for screen readers */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    position: absolute !important;
+    word-wrap: normal !important;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    color: var(--color-white);
+    background: var(--color-dark);
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+@media (min-width: 960px) {
+    body {
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+}
+
+a {
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-green);
+}
+
+h1, h2, h3 {
+    color: #111;
+    line-height: 1.2;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+/*
+This is the central area of the site, which includes a left-sidebar for #navigation and a right-area for #editor
+It simulates the common IDE feature of a resizable navigation tree for files and a main area to edit files
+On mobile, it won't be resizable, just a normal header
+ */
+#resizable-area {
+    position: relative;
+}
+
+@media (min-width: 960px) {
+    #resizable-area {
+        display: flex;
+        flex-direction: row;
+        height: calc(100% - var(--toolbars-height) - var(--toolbars-height));
+        overflow: hidden;
+    }
+}
+
+#navigation {
+    position: relative;
+    background-color: var(--color-grey);
+    padding: 45px;
+}
+
+@media (min-width: 960px) {
+    #navigation {
+        flex-basis: 360px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 100%;
+    }
+}
+
+#editor {
+    position: relative;
+    padding: 50px;
+    font-family: "Cousine", monospace;
+}
+
+@media (min-width: 960px) {
+    #editor {
+        right: 0;
+        flex-basis: auto;
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: 100%;
+        box-shadow: inset 0 0 10px #000;
+        overflow-y: scroll;
+    }
+}
+
+#handle {
+    display: none;
+}
+
+@media (min-width: 960px) {
+    #handle {
+        position: absolute;
+        display: block;
+        width: 4px;
+        height: 100%;
+        background-color: var(--color-blue);
+        top: 0;
+        right: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #handle:hover {
+        background-color: var(--color-green);
+        cursor: col-resize;
+    }
+}
+
+.site-title {
+    color: var(--color-orange)
+}
+
+/*
+Toolbars: the top bar and site footer appear as "toolbars"
+Just to display some generic information and make it look more like an IDE
+*/
+#top-bar,
+#site-footer {
+    height: var(--toolbars-height);
+    background-color: var(--color-grey);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px;
+}
+
+#top-bar{
+    border-bottom: 1px solid var(--color-dark);
+    justify-content: flex-end;
+}
+
+#site-footer{
+    border-top: 1px solid var(--color-dark);
+    justify-content: center;
+}
+
+#top-bar .version{
+    justify-self: flex-end;
+}
+
+#line-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    counter-reset: line;
+    padding: 0 10px;
+    pointer-events: none;
+}
+
+#line-numbers i {
+    display: block;
+    line-height: 35px;
+}
+
+#line-numbers i:before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    padding: 0;
+    color: #888;
+}
+
+#main-content {
+    position: relative;
+    padding: 30px 30px 200px 60px;
+}
